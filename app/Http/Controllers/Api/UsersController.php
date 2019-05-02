@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\User;
 use App\Http\Requests\Api\UserRequest;
+use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Cache;
 
 class UsersController extends Controller {
@@ -29,8 +30,17 @@ class UsersController extends Controller {
         // 清除验证码缓存
         Cache::forget($request->verification_key);
 
-        return $this->response->created();
-        $accessToken = '21__9nfEX21x0x2eY4LOXzL72_OD0-5K4GUnR2eWT2I_lFMoVOh3mOH6ZM34ORPSrZBXwjjH62g6uj8YlCnPm930w';
-        $openID = 'oqnAR1AMPjf-9CwNVHN4FnSYWtYQ';
+        return $this->response->item($user, new UserTransformer())
+            ->setMeta([
+                'access_token' => \Auth::guard('api')->fromUser($user),
+                'token_type' => 'Bearer',
+                'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
+            ])
+            ->setStatusCode(201);
+    }
+
+    public function me()
+    {
+        return $this->response->item($this->user(), new UserTransformer());
     }
 }
