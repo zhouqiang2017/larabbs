@@ -30,5 +30,7 @@ class UsersController extends Controller {
         Cache::forget($request->verification_key);
 
         return $this->response->created();
+        $accessToken = '21__9nfEX21x0x2eY4LOXzL72_OD0-5K4GUnR2eWT2I_lFMoVOh3mOH6ZM34ORPSrZBXwjjH62g6uj8YlCnPm930w';
+        $openID = 'oqnAR1AMPjf-9CwNVHN4FnSYWtYQ';
     }
 }
