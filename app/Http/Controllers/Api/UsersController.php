@@ -9,6 +9,12 @@ use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Cache;
 
 class UsersController extends Controller {
+
+    public function activedIndex(User $user)
+    {
+        return $this->response->collection($user->getActiveUsers(), new UserTransformer());
+    }
+
     public function store(UserRequest $request)
     {
         $verifyData = Cache::get($request->verification_key);
