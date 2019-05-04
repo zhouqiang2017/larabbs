@@ -64,6 +64,10 @@ $api->version('v1', [
         // 某个用户的回复列表
         $api->get('users/{user}/replies', 'RepliesController@userIndex')
             ->name('api.users.replies.index');
+        // 资源推荐
+        $api->get('links', 'LinksController@index')
+            ->name('api.links.index');
+
         // 需要 token 验证的接口
         $api->group(['middleware' => 'api.auth'], function($api) {
             // 当前登录用户信息
@@ -85,7 +89,6 @@ $api->version('v1', [
             // 删除回复
             $api->delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy')
                 ->name('api.topics.replies.destroy');
-            // 编辑登录用户信息
             // 通知列表
             $api->get('user/notifications', 'NotificationsController@index')
                 ->name('api.user.notifications.index');
@@ -98,10 +101,7 @@ $api->version('v1', [
             // 当前登录用户权限
             $api->get('user/permissions', 'PermissionsController@index')
                 ->name('api.user.permissions.index');
-
-
-
-
+            // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');
 
