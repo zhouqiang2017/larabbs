@@ -104,7 +104,7 @@ $api->version('v1', [
             // 当前登录用户权限
             $api->get('user/permissions', 'PermissionsController@index')
                 ->name('api.user.permissions.index');
-            // 编辑登录用户信息
+            // 修改登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');
 

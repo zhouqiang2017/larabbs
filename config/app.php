@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         App\Providers\EasySmsServiceProvider::class,
+        App\Providers\JpushServiceProvider::class,
 
         /*
          * Application Service Providers...
