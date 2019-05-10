@@ -22,14 +22,13 @@ class UsersTableSeeder extends Seeder
 
         // 生成数据集合
         $users = factory(User::class)
-                        ->times(10)
-                        ->make()
-                        ->each(function ($user, $index)
-                            use ($faker, $avatars)
-        {
-            // 从头像数组中随机取出一个并赋值
-            $user->avatar = $faker->randomElement($avatars);
-        });
+            ->times(10)
+            ->make()
+            ->each(function ($user, $index)
+            use ($faker, $avatars) {
+                // 从头像数组中随机取出一个并赋值
+                $user->avatar = $faker->randomElement($avatars);
+            });
 
         // 让隐藏字段可见，并将数据集合转换为数组
         $user_array = $users->makeVisible(['password', 'remember_token'])->toArray();

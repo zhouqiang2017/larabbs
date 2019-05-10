@@ -43,6 +43,8 @@ $api->version('v1', [
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')
             ->name('api.authorizations.destroy');
     });
+
+    //
     $api->group([
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.access.limit'),
